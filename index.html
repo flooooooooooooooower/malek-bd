@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Malak 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(-45deg,#ff4d6d,#ffb3c1,#6a4cff,#4d96ff);
+  background-size:400% 400%;
+  animation:bg 10s ease infinite;
+  font-family:'Cairo', sans-serif;
+  overflow:hidden;
+  color:white;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.box{
+  width:85%;
+  max-width:450px;
+  padding:35px;
+  background:rgba(0,0,0,0.35);
+  border-radius:25px;
+  backdrop-filter: blur(12px);
+  box-shadow:0 0 30px rgba(255,255,255,0.15);
+  text-align:center;
+}
+
+h2{
+  font-size:30px;
+  margin-bottom:15px;
+}
+
+p{
+  font-size:20px;
+  line-height:1.7;
+}
+
+.step{
+  display:none;
+  animation:fade 0.7s ease;
+}
+
+.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  background:white;
+  color:black;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.08);
+}
+
+.heart{
+  font-size:50px;
+  animation:beat 1s infinite;
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+}
+
+.final{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.small{
+  font-size:18px;
+  opacity:0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <!-- STEP 1 -->
+  <div class="step active" id="s1">
+    <h2>💭 رسالة خاصة</h2>
+    <p>عندي كلام خرج من القلب... حاب توصلهولك خطوة خطوة</p>
+    <button onclick="next(1)">نبدأ</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="s2">
+    <h2>✨ الحقيقة الأولى</h2>
+    <p>من نهار عرفتك وقلبي ولا يهدر باسمك بلا ما نحس 💖</p>
+    <button onclick="next(2)">كمل</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="s3">
+    <h2>💫 إحساس</h2>
+    <p>كل لحظة معاك ولو بكلمة... تعنيلي الدنيا كامل ✨</p>
+    <button onclick="next(3)">واصل</button>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="s4">
+    <h2>💖 قربنا للرسالة</h2>
+    <p>راك في قلبي بطريقة ما تتوصفش... غير تحسها</p>
+    <button onclick="next(4)">افتح القلب</button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="step" id="s5">
+    <div class="heart">❤️</div>
+    <h2 class="final">Happy Birthday Malak 🎉</h2>
+    <p class="small">
+      كل عام وأنتِ أجمل صدفة صارت لي 💖<br>
+      ربي يفرح قلبك كيما فرحتي قلبي وجودك ✨<br><br>
+      <b>من طرف صابر</b>
+    </p>
+  </div>
+
+</div>
+
+<script>
+function next(n){
+  document.getElementById("s"+n).classList.remove("active");
+  document.getElementById("s"+(n+1)).classList.add("active");
+}
+</script>
+
+</body>
+</html>
