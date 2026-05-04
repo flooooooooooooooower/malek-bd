@@ -4,149 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى ملكتي ملك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #ff4d6d;
-            --secondary-color: #ffb3c1;
-            --glass: rgba(255, 255, 255, 0.15);
+            --primary-font: 'Cairo', sans-serif;
+            --fancy-font: 'Amiri', serif;
+            --kufi-font: 'Reem Kufi', sans-serif;
+            --accent-color: #ff4d6d;
         }
 
         body {
             margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: #0a0a0a;
-            font-family: 'Cairo', sans-serif;
-            overflow: hidden;
             color: white;
+            font-family: var(--primary-font);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* خلفية متحركة */
-        .bg-animate {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #2b0b1a 0%, #000 100%);
-            z-index: -1;
-        }
-
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 90%;
-            animation: fadeIn 2s ease-in-out;
-        }
-
+        /* تنسيق النصوص لجعلها "جميلة" */
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #ff4d6d, #fff);
+            font-family: var(--kufi-font);
+            font-size: 4rem;
+            letter-spacing: 2px;
+            background: linear-gradient(to bottom, #fff 30%, var(--accent-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.3));
+            margin-bottom: 0;
         }
 
-        .heart {
-            font-size: 60px;
-            color: var(--primary-color);
-            filter: drop-shadow(0 0 10px var(--primary-color));
-            animation: beat 1.2s infinite;
+        p {
+            font-family: var(--fancy-font);
+            font-size: 1.6rem;
+            line-height: 1.8;
+            color: #f0f0f0;
+            max-width: 700px;
+            margin: 20px auto;
+            font-style: italic;
         }
 
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .message {
-            line-height: 1.6;
-            font-size: 1.1rem;
-            color: #eee;
+        /* تصميم كروت الرسائل بخط مميز */
+        .msg-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid var(--accent-color); /* لمسة جمالية عربية */
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.5s;
         }
 
-        .btn-surprise {
-            margin-top: 25px;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            background: var(--primary-color);
+        .msg-card h3 {
+            font-family: var(--kufi-font);
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        /* زر التنقل بتصميم ناعم */
+        .btn-fancy {
+            font-family: var(--primary-font);
+            text-decoration: none;
             color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.4s;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            border: 1px solid var(--accent-color);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+            display: inline-block;
         }
 
-        .btn-surprise:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+        .btn-fancy:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-color);
+            transform: scale(1.05);
         }
 
-        canvas {
-            position: absolute;
-            pointer-events: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* تأثير النجوم في الخلفية */
+        #starfield {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"></div>
-    <canvas id="stars"></canvas>
+    <canvas id="starfield"></canvas>
 
-    <div class="card">
-        <div class="heart">❤️</div>
-        <h1>ميلاد سعيد مـلـك</h1>
-        <p class="message">
-            في هذا اليوم المميز، أردت أن أهديكِ شيئاً لا ينتهي بانتهاء اليوم.. كوداً يخلد اسمك في عالم البرمجة، تماماً كما هو مخلد في قلبي.
-        </p>
-        <button class="btn-surprise" onclick="startCelebration()">إضغطي هنا ✨</button>
-    </div>
+    <section>
+        <h1>مـلـك</h1>
+        <p>بين ملامحكِ الهادئة وسحر عينيكِ، يكمن جمال هذا العالم..</p>
+        <a href="#messages" class="btn-fancy">إلى قلب ملك..</a>
+    </section>
+
+    <section id="messages">
+        <div class="msg-card">
+            <h3>ذكرى لا تُنسى</h3>
+            <p>كل ثانية مرت معكِ كانت بمثابة عمر كامل من السعادة والرضا.</p>
+        </div>
+        <div class="msg-card">
+            <h3>أمنيتي لكِ</h3>
+            <p>أتمنى أن تبقى ضحكتكِ منيرة كالقمر في عتمة أيامي، كل عام وأنتِ بخير.</p>
+        </div>
+        <a href="#final" class="btn-fancy">المفاجأة الأخيرة</a>
+    </section>
+
+    <section id="final">
+        <h2 style="font-family: var(--kufi-font); font-size: 3rem;">أحبكِ دائماً</h2>
+        <p>هذا الكود هو بصمة حب مخلدة باسمك في السحاب الرقمي.</p>
+        <div style="font-size: 5rem; animation: pulse 2s infinite;">❤️</div>
+    </section>
 
     <script>
-        // تأثير النجوم المتساقطة
-        const canvas = document.getElementById('stars');
+        // كود النجوم المتحركة لجعل الخلفية حية
+        const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const stars = Array(100).fill().map(() => ({
+        const stars = Array(200).fill().map(() => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 2,
-            velocity: Math.random() * 0.5
+            r: Math.random() * 1.5,
+            d: Math.random() * 0.5
         }));
 
-        function animate() {
-            ctx.clearRect(0,0, canvas.width, canvas.height);
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "white";
             stars.forEach(s => {
-                s.y += s.velocity;
-                if (s.y > canvas.height) s.y = 0;
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
                 ctx.fill();
+                s.y -= s.d;
+                if (s.y < 0) s.y = canvas.height;
             });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(draw);
         }
-        animate();
-
-        function startCelebration() {
-            alert("كل عام وأنتِ بخير يا أغلى ملك في الكون! 🎂✨");
-            // يمكنك إضافة رابط يوتيوب لموسيقى هادئة هنا
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank'); 
-        }
+        draw();
     </script>
 </body>
 </html>
