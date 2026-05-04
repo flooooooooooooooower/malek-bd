@@ -1,269 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Malak 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى ملكتي ملك</title>
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #ffb3c1;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background: linear-gradient(-45deg,#ffd1dc,#c1f0ff,#d8b4fe,#ffc6ff);
-  background-size:400% 400%;
-  animation:bg 10s ease infinite;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  overflow:hidden;
-  color:white;
-}
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
 
-@keyframes bg{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+        /* خلفية متحركة */
+        .bg-animate {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #2b0b1a 0%, #000 100%);
+            z-index: -1;
+        }
 
-.box{
-  width:90%;
-  max-width:420px;
-  padding:28px;
-  background:rgba(255,255,255,0.12);
-  border-radius:25px;
-  backdrop-filter: blur(15px);
-  text-align:center;
-  box-shadow:0 0 25px rgba(255,255,255,0.15);
-  animation: float 3s ease-in-out infinite;
-}
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 2s ease-in-out;
+        }
 
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff4d6d, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-h2{
-  font-size:22px;
-  margin-bottom:10px;
-  font-weight:600;
-}
+        .heart {
+            font-size: 60px;
+            color: var(--primary-color);
+            filter: drop-shadow(0 0 10px var(--primary-color));
+            animation: beat 1.2s infinite;
+        }
 
-p{
-  font-size:16px;
-  line-height:1.6;
-  font-weight:300;
-}
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
 
-.step{display:none; animation:fade .6s ease;}
-.active{display:block;}
+        .message {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #eee;
+        }
 
-@keyframes fade{
-  from{opacity:0; transform:scale(0.98);}
-  to{opacity:1; transform:scale(1);}
-}
+        .btn-surprise {
+            margin-top: 25px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            background: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
 
-button{
-  margin-top:15px;
-  padding:10px 18px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  background:white;
-  font-weight:600;
-  font-size:14px;
-}
+        .btn-surprise:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+        }
 
-button:hover{transform:scale(1.05);}
+        canvas {
+            position: absolute;
+            pointer-events: none;
+        }
 
-.heart{
-  font-size:50px;
-  animation: beat 1.2s infinite;
-}
-
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.3);}
-}
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="box">
+    <div class="bg-animate"></div>
+    <canvas id="stars"></canvas>
 
-  <div class="step active" id="s1">
-    <h2>💭 Message</h2>
-    <p>عندي حاجة خاصة ليك… خطوة خطوة ✨</p>
-    <button onclick="next(1)">Start</button>
-  </div>
+    <div class="card">
+        <div class="heart">❤️</div>
+        <h1>ميلاد سعيد مـلـك</h1>
+        <p class="message">
+            في هذا اليوم المميز، أردت أن أهديكِ شيئاً لا ينتهي بانتهاء اليوم.. كوداً يخلد اسمك في عالم البرمجة، تماماً كما هو مخلد في قلبي.
+        </p>
+        <button class="btn-surprise" onclick="startCelebration()">إضغطي هنا ✨</button>
+    </div>
 
-  <div class="step" id="s2">
-    <h2>🌸 Feeling</h2>
-    <p>من نهار عرفتك وقلبي ولا مرتاح أكثر 💖</p>
-    <button onclick="next(2)">Next</button>
-  </div>
+    <script>
+        // تأثير النجوم المتساقطة
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-  <div class="step" id="s3">
-    <h2>💫 Moment</h2>
-    <p>وجودك يخلّي كل حاجة أجمل ✨</p>
-    <button onclick="next(3)">Next</button>
-  </div>
+        const stars = Array(100).fill().map(() => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2,
+            velocity: Math.random() * 0.5
+        }));
 
-  <div class="step" id="s4">
-    <h2>💖 Close</h2>
-    <p>راك شخص خاص بزاف بالنسبة ليا 💕</p>
-    <button onclick="next(4)">Open</button>
-  </div>
+        function animate() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            stars.forEach(s => {
+                s.y += s.velocity;
+                if (s.y > canvas.height) s.y = 0;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
 
-  <div class="step" id="s5">
-    <div class="heart">💖</div>
-    <h2>Happy Birthday Malak 🎉</h2>
-    <p>كل عام وأنتِ بخير 🌸<br>ربي يفرح قلبك ديما ✨</p>
-  </div>
-
-</div>
-
-<script>
-function next(n){
-  document.getElementById("s"+n).classList.remove("active");
-  document.getElementById("s"+(n+1)).classList.add("active");
-}
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Malak 💖</title>
-
-<style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background: linear-gradient(-45deg,#ffd1dc,#c1f0ff,#d8b4fe,#ffc6ff);
-  background-size:400% 400%;
-  animation:bg 10s ease infinite;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  overflow:hidden;
-  color:white;
-}
-
-@keyframes bg{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-.box{
-  width:90%;
-  max-width:420px;
-  padding:28px;
-  background:rgba(255,255,255,0.12);
-  border-radius:25px;
-  backdrop-filter: blur(15px);
-  text-align:center;
-  box-shadow:0 0 25px rgba(255,255,255,0.15);
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-
-h2{
-  font-size:22px;
-  margin-bottom:10px;
-  font-weight:600;
-}
-
-p{
-  font-size:16px;
-  line-height:1.6;
-  font-weight:300;
-}
-
-.step{display:none; animation:fade .6s ease;}
-.active{display:block;}
-
-@keyframes fade{
-  from{opacity:0; transform:scale(0.98);}
-  to{opacity:1; transform:scale(1);}
-}
-
-button{
-  margin-top:15px;
-  padding:10px 18px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  background:white;
-  font-weight:600;
-  font-size:14px;
-}
-
-button:hover{transform:scale(1.05);}
-
-.heart{
-  font-size:50px;
-  animation: beat 1.2s infinite;
-}
-
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.3);}
-}
-</style>
-</head>
-
-<body>
-
-<div class="box">
-
-  <div class="step active" id="s1">
-    <h2>💭 Message</h2>
-    <p>عندي حاجة خاصة ليك… خطوة خطوة ✨</p>
-    <button onclick="next(1)">Start</button>
-  </div>
-
-  <div class="step" id="s2">
-    <h2>🌸 Feeling</h2>
-    <p>من نهار عرفتك وقلبي ولا مرتاح أكثر 💖</p>
-    <button onclick="next(2)">Next</button>
-  </div>
-
-  <div class="step" id="s3">
-    <h2>💫 Moment</h2>
-    <p>وجودك يخلّي كل حاجة أجمل ✨</p>
-    <button onclick="next(3)">Next</button>
-  </div>
-
-  <div class="step" id="s4">
-    <h2>💖 Close</h2>
-    <p>راك شخص خاص بزاف بالنسبة ليا 💕</p>
-    <button onclick="next(4)">Open</button>
-  </div>
-
-  <div class="step" id="s5">
-    <div class="heart">💖</div>
-    <h2>Happy Birthday Malak 🎉</h2>
-    <p>كل عام وأنتِ بخير 🌸<br>ربي يفرح قلبك ديما ✨</p>
-  </div>
-
-</div>
-
-<script>
-function next(n){
-  document.getElementById("s"+n).classList.remove("active");
-  document.getElementById("s"+(n+1)).classList.add("active");
-}
-</script>
-
+        function startCelebration() {
+            alert("كل عام وأنتِ بخير يا أغلى ملك في الكون! 🎂✨");
+            // يمكنك إضافة رابط يوتيوب لموسيقى هادئة هنا
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank'); 
+        }
+    </script>
 </body>
 </html>
+
